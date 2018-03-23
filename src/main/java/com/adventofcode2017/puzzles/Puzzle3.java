@@ -9,6 +9,74 @@ public class Puzzle3 implements IPuzzle {
 //	private final int INPUT = 37;
 	@Override
 	public void execute() {
+		executeStep1();
+		executeStep2();
+	}
+	
+	private void executeStep2() {
+		int sq[][] = new int[100][100];
+		int x = 50;
+		int y = 50;
+		int cursqsz = 3;
+		
+		sq[x][y] = 1;
+
+		try {
+			for (;;) {
+				x += 1;
+				sq[x][y] = addAll(sq, x, y);
+				for (int i = 1; i < cursqsz - 1; i++) {
+					y += 1;
+					sq[x][y] = addAll(sq, x, y);
+				}
+				for (int i = 1; i < cursqsz; i++) {
+					x -= 1;
+					sq[x][y] = addAll(sq, x, y);
+				}
+				for (int i = 1; i < cursqsz; i++) {
+					y -= 1;
+					sq[x][y] = addAll(sq, x, y);
+				}
+				for (int i = 1; i < cursqsz; i++) {
+					x += 1;
+					sq[x][y] = addAll(sq, x, y);
+				}
+				cursqsz += 2;
+//				printSq(sq);
+			}
+		} catch(Exception e) {
+			System.out.println("Result = " + e.getMessage());
+		}
+		
+	}
+	
+	private void printSq(int[][] sq) {
+		System.out.println();
+		for(int y = 0; y < 100; y++) {
+			for(int x = 0; x < 100; x++) {
+				System.out.print(String.format("%5d", sq[x][y]));
+			}
+			System.out.println();
+		}
+	}
+	
+	private int addAll(int[][] sq, int x, int y) throws Exception {
+		int value = 0;
+		value += sq[x-1][y+1];
+		value += sq[x][y+1];
+		value += sq[x+1][y+1];
+		value += sq[x-1][y];
+		value += sq[x+1][y];
+		value += sq[x-1][y-1];
+		value += sq[x][y-1];
+		value += sq[x+1][y-1];
+		if(value >= INPUT) {
+			throw new Exception(new Integer(value).toString());
+		}
+		return value;
+	}
+	
+	private void executeStep1() {
 		//determine which square is the good one
 		int squarenb = 1;
 		int squaresize = 0;
