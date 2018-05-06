@@ -24,6 +24,7 @@ public class Puzzles {
 		puzzles.add(new Puzzle3());
 		puzzles.add(new Puzzle4());
 		puzzles.add(new Puzzle5());
+		puzzles.add(new Puzzle6());
 		
 		System.out.println("Puzzle ? ");
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
